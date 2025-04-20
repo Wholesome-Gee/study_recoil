@@ -3,7 +3,8 @@
 📍 강의 사이트 : NOMAD CORDER  
 📍 강의 제목 : React JS 마스터클래스  
 📍 강의 챕터 : #6 STATE MANAGEMENT  
-📍 비고 : NOMAD CORDER 'React JS 마스터클래스 #5 CRYPTO TRACKER' 강의 내용을 기반으로 작성됨.  
+📍 비고 : NOMAD CORDER 'React JS 마스터클래스 #5 CRYPTO TRACKER' 강의 내용에서 Theme Change Button을 추가하였고 (#6.4),  
+ 이후 새로운 ToDoList를 만들기 위해 초기화작업을 #6.5에서 진행함.  
 📍 비고 : React 18 버전 사용  
 📍 라이브러리 :
 
@@ -45,5 +46,11 @@
 **📗useSetRecoilState()를 사용하여 recoil의 변수(atom)의 값을 변경하기**
 
 - `const setIsDarkAtom = useSetRecoilState(isDarkAtom)`
+
+---
+
+### #6.5
+
+**📗toDoList를 만들기 위한 프로젝트 초기화 작업**
 
 ---
