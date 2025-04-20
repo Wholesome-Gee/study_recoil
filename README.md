@@ -39,3 +39,11 @@
 - `const isDark = useRecoilValue(isDarkAtom)`
 
 ---
+
+### #6.3
+
+**📗useSetRecoilState()를 사용하여 recoil의 변수(atom)의 값을 변경하기**
+
+- `const setIsDarkAtom = useSetRecoilState(isDarkAtom)`
+
+---

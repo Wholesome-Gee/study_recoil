@@ -33,7 +33,7 @@ const Coin = styled.li`
   }
 `;
 const Title = styled.h1`
-  font-size: 48px;
+  font-size: 36px;
   color: ${(props) => props.theme.accentColor};
 `;
 const Loader = styled.span`

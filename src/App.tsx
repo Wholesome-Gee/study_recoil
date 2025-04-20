@@ -2,7 +2,7 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools"; // react-query 시각화 작업을위한 import
 import Router from "./Router";
 import { darkTheme, lightTheme } from "./theme";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "./atoms";
 
 const GlobalStyles = createGlobalStyle`
@@ -66,13 +66,41 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
   }
 `;
+const ThemeChangeButton = styled.button`
+  background-color: ${(props) => props.theme.textColor};
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  font-size: 28px;
+  outline: none;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: ${(props) => props.theme.accentColor};
+  }
+`;
 
 function App() {
   const isDark = useRecoilValue(isDarkAtom);
+  const setIsDarkAtom = useSetRecoilState(isDarkAtom);
   // useRecoilValue()는 recoil에 등록된 변수(atom)를 가져오는 방법  #6.2
+  // useSetRecoilState()는 recoil에 등록된 변수(atom)를 변경하는 함수를 반환한다.  #6.3
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyles />
+      <ThemeChangeButton
+        onClick={() => {
+          setIsDarkAtom((value) => !value);
+        }}
+      >
+        <p>{isDark ? "☀️" : "🌙"}</p>
+      </ThemeChangeButton>
       <Router />
       <ReactQueryDevtools initialIsOpen={true} />
     </ThemeProvider>
