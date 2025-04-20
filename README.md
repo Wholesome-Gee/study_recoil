@@ -54,3 +54,21 @@
 **📗toDoList를 만들기 위한 프로젝트 초기화 작업**
 
 ---
+
+### #6.6
+
+**📗react-hook-form은 form 작업을 보다 수월하게 해주는 라이브러리**
+
+- `npm i react-hook-form`
+
+**📗useForm()을 사용하여 form 요소를 react-hook-form에 등록하기**
+
+```tsx
+const { register, watch } = useForm()
+console.log(watch())
+// watch()는 input에 123123입력 시 → {email: '123123'} 를 리턴
+<input {...register('email')} placeholder="email을 입력하세요.">
+```
+
+- {...register('email')}을 사용하여 해당 input을 'email'이라는 식별자로 react-hook-form에 등록할 수 있다.
+- watch()는 react-hook-form에 등록된 form 요소들에 변화가 생기는걸 추적한다.
