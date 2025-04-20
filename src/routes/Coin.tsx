@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
-import { Helmet } from "react-helmet"; // npm i react-helmet,  npm i --save-dev @types/react-helmet  #5.15
+import { Helmet } from "react-helmet";
 
 const Title = styled.h1`
   font-size: 36px;
@@ -135,9 +135,6 @@ interface ITickersData {
     };
   };
 }
-/*
-object의 많은 properties를 개발자도구를 활용해 쉽게 type하는 방법  #5.6
-*/
 
 function Coin() {
   const { state } = useLocation();
@@ -148,15 +145,6 @@ function Coin() {
   const { isLoading: isTickersLoading, data: tickersData } = useQuery<ITickersData>(["tickers", coinId], () => fetchCoinTickers(coinId));
   let loading = isInfoLoading || isTickersLoading;
 
-  /*
-  const [loading, setLoading] = useState(true);
-  const [info, setInfo] = useState<IInfo>();
-  const [priceInfo, setPriceInfo] = useState<IPriceInfo>();
-  
-  useLocation()은 react-router-dom의 Link로부터 넘어온 URL의 정보를 제공한다. (pathname, state, search, hash, key 등)  #5.4
-  useParams()는 react-router-dom의 route로부터 넘어온 URL Parameter를 제공한다. (ex. path=/:coinId )  #5.0
-  useRouteMatch(url)은 현재 유저가 url에 위치하고 있다면 Object를, 아니라면 null을 반환한다.  #5.8
-  */
   console.log("Coin.tsx 37", useLocation());
   console.log("Coin.tsx 38", useParams());
   console.log("Coin.tsx 39", priceMatch);
@@ -215,10 +203,5 @@ function Coin() {
     </Container>
   );
 }
-/*
-<Helmet>은 html의 <head>에 전달되는 내용들이다.  #5.15
-<Outlet>은 Router.tsx에 지정한 nested router들이 들어올 공간이다.  #5.7 'horrorkist 댓글 참고
-<Outlet>은 context를 통하여 nested route component에게 props(context)를 전달할 수 있다.  #5.12 'salt01' 댓글 참고
-*/
 
 export default Coin;

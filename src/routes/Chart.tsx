@@ -2,9 +2,9 @@ import { useQuery } from "react-query";
 import { fetchCoinHistory } from "../api";
 import { useOutletContext } from "react-router-dom";
 import ApexChart from "react-apexcharts"; // npm i --save react-apexcharts apexcharts  #5.13
-import { Helmet } from "react-helmet";
-import { useState } from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const ChartBox = styled.div`
   border: 1px solid ${(props) => props.theme.textColor};
@@ -68,10 +68,8 @@ interface IContext {
 function Chart() {
   const { coinId } = useOutletContext<IContext>();
   const { isLoading, data } = useQuery<IData[]>("ohlcv", () => fetchCoinHistory(coinId), { refetchInterval: 10000 });
-  /*
-  useOutletContext()는 상위 component로부터 nested route component에게 전달된 props(context)를 확인하는 방법  #5.12 'salt01' 댓글 참고
-  useQuery()의 3번째 parameter인 {refetchInterval:10000}은 10000ms마다 refetch를 시도한다  #5.15
-  */
+  const isDark = useRecoilValue(isDarkAtom);
+  // useRecoilValue()는 recoil에 등록된 변수(atom)를 가져오는 방법  #6.2
   return (
     <>
       {isLoading ? (
@@ -92,7 +90,7 @@ function Chart() {
               ]}
               options={{
                 theme: {
-                  mode: "dark",
+                  mode: isDark ? "dark" : "light",
                 },
                 chart: {
                   height: 300,

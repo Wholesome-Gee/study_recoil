@@ -159,11 +159,3 @@ function Price() {
 }
 
 export default Price;
-
-// percent_change_1h: -0.04
-// percent_change_6h: 0.01
-// percent_change_12h: 0.14
-// percent_change_24h: 0.12
-// percent_change_7d: 0.69
-// percent_change_1y: 0.98
-// percent_change_1y: 30.87

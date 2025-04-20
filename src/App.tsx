@@ -2,7 +2,8 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools"; // react-query 시각화 작업을위한 import
 import Router from "./Router";
 import { darkTheme, lightTheme } from "./theme";
-import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
@@ -65,50 +66,17 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
   }
 `;
-const ThemeButton = styled.button`
-  border: none;
-  outline: none;
-  width: 50px;
-  height: 50px;
-  font-size: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: ${(props) => props.theme.textColor};
-  span {
-    margin: 0;
-    padding: 0;
-    transition: all 0.2s ease-in-out;
-  }
-  &:hover span {
-    transform: scale(1.2);
-  }
-`;
-// createGlobalStyle은 globalStyle을 지정할 때 사용한다.  #5.1
 
 function App() {
-  const [isDark, setIsDark] = useState(true);
+  const isDark = useRecoilValue(isDarkAtom);
+  // useRecoilValue()는 recoil에 등록된 변수(atom)를 가져오는 방법  #6.2
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyles />
-      <ThemeButton
-        onClick={() => {
-          setIsDark((current) => !current);
-        }}
-      >
-        <span>{isDark ? "☀️" : "🌙"}</span>
-      </ThemeButton>
-      <Router isDark={isDark} />
+      <Router />
       <ReactQueryDevtools initialIsOpen={true} />
     </ThemeProvider>
   );
 }
-/*
-72. react=query 시각화 작업
-*/
 
 export default App;
