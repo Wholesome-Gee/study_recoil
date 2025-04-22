@@ -107,3 +107,9 @@ const { register, watch } = useForm()
 **📗useForm()의 register의 조건식을 활용한 validate 기능**
 
 ---
+
+### #6.10
+
+**📗useForm()의 setValue를 사용하여 input의 value 변경하기**
+
+---
