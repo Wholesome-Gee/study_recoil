@@ -97,5 +97,13 @@ const { register, watch } = useForm()
 
 **📗useForm()에 type하는 방법**
 **📗useForm()의 formState.errors를 사용하여 유효성 검사 실패시 errorMessage 도출하기**
+**📗useForm({defaultValues:{inputKey:"value"}})를 사용하여 input의 기본값 설정하기**
+
+---
+
+### #6.9
+
+**📗useForm()의 serError를 사용하여 error를 일으키기**
+**📗useForm()의 register의 조건식을 활용한 validate 기능**
 
 ---
