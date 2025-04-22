@@ -1,13 +1,26 @@
 import { useForm } from "react-hook-form"; // npm i react-hook-form
+import { atom, useRecoilState } from "recoil";
+
+// atom 정의
+const toDoState = atom<IToDoState[]>({
+  key: "toDo",
+  default: [],
+});
 
 // useForm에 타입하는방법 #6.8
 // register로 등록된 form 요소들의 key를 적어주면 된다. #6.8
-
 interface IForm {
   toDo: string;
 }
 
+interface IToDoState {
+  text: string;
+  id: number;
+  category: "TO_DO" | "DOING" | "DONE";
+}
+
 export default function ToDoList() {
+  const [toDos, setToDos] = useRecoilState(toDoState);
   const {
     register,
     watch,
@@ -16,6 +29,7 @@ export default function ToDoList() {
     setError,
     setValue,
   } = useForm<IForm>({ defaultValues: {} });
+  // useRecoilState(atom)은 atom의 getter,setter를 반환한다.  #6.11
   // register = form 관련 요소를 react-hook-form에 등록  #6.6
   // watch('key') = 'key'요소의 변화를 관찰, watch()는 전체 form 관련 요소의 변화를 관찰  #6.6
   // handleSubmit = form이 submit되었을 때 유효성검사 진행 & 새로고침 X  #6.7
@@ -26,7 +40,15 @@ export default function ToDoList() {
   // setValue = input 값을 변경  #6.10
 
   function successSubmit(data: IForm) {
-    console.log("data.toDo =", data.toDo);
+    console.log("✔️ success", data);
+    setToDos((current) => [
+      {
+        text: data.toDo,
+        id: Date.now(),
+        category: "TO_DO",
+      },
+      ...current,
+    ]);
     setValue("toDo", "");
   }
   // setError('input key', errorMessage, { shouldFocus:true는 focus를 input에 다시 되돌려놓는다. })  #6.9
@@ -34,10 +56,13 @@ export default function ToDoList() {
 
   return (
     <div>
+      <h1>오늘의 할일</h1>
+      <hr />
       <form onSubmit={handleSubmit(successSubmit)}>
         <input {...register("toDo", { required: "할 일을 입력하세요." })} placeholder="할 일을 입력하세요." />
         <button>추가</button>
       </form>
+      <ul></ul>
     </div>
   );
 }
