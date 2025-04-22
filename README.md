@@ -113,3 +113,9 @@ const { register, watch } = useForm()
 **📗useForm()의 setValue를 사용하여 input의 value 변경하기**
 
 ---
+
+### #6.12
+
+**📗spread문법으로 하위 component에게 props 보내기**
+
+---
