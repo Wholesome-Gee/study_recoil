@@ -14,6 +14,7 @@
 - react-query : `npm i react-query`
   - react-query는 React v18 이하에서 구동이 가능하다.
 - recoil : `npm i recoil`
+- react-hook-form : `npm i react-hook-form`
 
 ---
 
@@ -65,10 +66,29 @@
 
 ```tsx
 const { register, watch } = useForm()
-console.log(watch())
+// console.log(watch())
 // watch()는 input에 123123입력 시 → {email: '123123'} 를 리턴
 <input {...register('email')} placeholder="email을 입력하세요.">
 ```
 
 - {...register('email')}을 사용하여 해당 input을 'email'이라는 식별자로 react-hook-form에 등록할 수 있다.
 - watch()는 react-hook-form에 등록된 form 요소들에 변화가 생기는걸 추적한다.
+
+  ***
+
+### #6.7
+
+**📗useForm()의 handleSubmit 기능**
+
+- handleSubmit은 form의 유효성검사를 해주고 새로고침현상도 막아준다.
+- handleSubmit은 2개의 인자를 받는다.
+  - 유효성검사에 성공하여 submit 했을때 (필수)
+  - 유효성검사에 실패하여 error가 발생했을때 (옵션)
+
+**📗useForm()의 formState() 기능**
+
+- formState는 현재 form의 상태를 담고있는 객체다.
+- isLoading, isDirty, isSubmitted 등 boolean값을 반환하는 메서드가 들어있다.
+- submit 중 error가 발생할 경우 error의 내용을 반환하는 errors 메서드도 들어있다.
+
+---
