@@ -92,3 +92,10 @@ const { register, watch } = useForm()
 - submit 중 error가 발생할 경우 error의 내용을 반환하는 errors 메서드도 들어있다.
 
 ---
+
+### #6.8
+
+**📗useForm()에 type하는 방법**
+**📗useForm()의 formState.errors를 사용하여 유효성 검사 실패시 errorMessage 도출하기**
+
+---
