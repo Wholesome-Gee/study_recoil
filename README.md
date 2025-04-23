@@ -126,3 +126,9 @@ const { register, watch } = useForm()
 **📗Array.slice()를 사용하여 배열 요소 자르기**
 
 ---
+
+### #6.16
+
+**📗recoil의 selector에서 get 사용법**
+
+---

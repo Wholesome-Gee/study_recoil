@@ -1,14 +1,12 @@
-import { useForm } from "react-hook-form";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import ToDoForm from "./ToDoForm";
-import { toDoState } from "../atom";
+import { categoryState, toDoSelector } from "../atom";
 import ToDo from "./ToDo";
 
 export default function ToDoList() {
-  const toDos = useRecoilValue(toDoState);
-
-  console.log(toDos);
-
+  const toDos = useRecoilValue(toDoSelector);
+  const [category, setCategory] = useRecoilState(categoryState);
+  // recoil selector도 atom처럼 useRecoilValue, useRecoilState를 통해 불러올 수 있다.  #6.16~#6.17
   /*
   const [toDos, setToDos] = useRecoilState(toDoState);
   const {watch, formState: { errors }, setError } = useForm<IForm>({ defaultValues: {} });
@@ -18,16 +16,24 @@ export default function ToDoList() {
   useForm({defaultValues:{location:"서울"}}) = location input에 기본값 설정  #6.8
   setError = error를 의도적으로 발생  #6.9
   */
+
+  function onInput(event: React.FormEvent<HTMLSelectElement>) {
+    setCategory(event.currentTarget.value);
+  }
+
   return (
     <div>
       <h1>오늘의 할일</h1>
       <hr />
+      <select value={category} onInput={onInput}>
+        <option value="TO_DO">할 일</option>
+        <option value="DOING">진행중</option>
+        <option value="DONE">완료</option>
+      </select>
       <ToDoForm />
-      <ul>
-        {toDos.map((toDo) => (
-          <ToDo key={toDo.id} {...toDo} />
-        ))}
-      </ul>
+      {toDos?.map((toDo) => {
+        return <ToDo key={toDo.id} {...toDo} />;
+      })}
     </div>
   );
 }
