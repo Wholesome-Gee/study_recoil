@@ -16,7 +16,7 @@ function ToDoForm() {
   const setToDos = useSetRecoilState(toDoState);
 
   function successSubmit(data: IForm) {
-    console.log("✔️ success", data);
+    // console.log("✔️ success", data);
     setToDos((current) => [
       {
         text: data.toDo,

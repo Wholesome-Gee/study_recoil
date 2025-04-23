@@ -6,6 +6,9 @@ import ToDo from "./ToDo";
 
 export default function ToDoList() {
   const toDos = useRecoilValue(toDoState);
+
+  console.log(toDos);
+
   /*
   const [toDos, setToDos] = useRecoilState(toDoState);
   const {watch, formState: { errors }, setError } = useForm<IForm>({ defaultValues: {} });
