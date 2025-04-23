@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"; // npm i react-hook-form
-import { useSetRecoilState } from "recoil";
-import { toDoState } from "../atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { categoryState, toDoState } from "../atom";
 
 interface IForm {
   toDo: string;
@@ -9,10 +9,11 @@ interface IForm {
 function ToDoForm() {
   const { register, handleSubmit, setValue } = useForm<IForm>();
   /*
-    register = form 관련 요소를 react-hook-form에 등록  #6.6
-    handleSubmit = form이 submit되었을 때 유효성검사 진행 & 새로고침 X, 2개 콜백함수를 parameter를 받음 ( 유효성검사 성공시(필수),실패시(옵션) )  #6.7
-    setValue = input 값을 변경  #6.10
-    */
+  register = form 관련 요소를 react-hook-form에 등록  #6.6
+  handleSubmit = form이 submit되었을 때 유효성검사 진행 & 새로고침 X, 2개 콜백함수를 parameter를 받음 ( 유효성검사 성공시(필수),실패시(옵션) )  #6.7
+  setValue = input 값을 변경  #6.10
+  */
+  const category = useRecoilValue(categoryState);
   const setToDos = useSetRecoilState(toDoState);
 
   function successSubmit(data: IForm) {
@@ -21,7 +22,7 @@ function ToDoForm() {
       {
         text: data.toDo,
         id: Date.now(),
-        category: "TO_DO",
+        category,
       },
       ...current,
     ]);

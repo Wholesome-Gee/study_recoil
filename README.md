@@ -132,3 +132,9 @@ const { register, watch } = useForm()
 **📗recoil의 selector에서 get 사용법**
 
 ---
+
+### #6.18
+
+**📗typescript의 enum 사용법**
+
+---

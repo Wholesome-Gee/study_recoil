@@ -1,11 +1,20 @@
 import { atom, selector } from "recoil";
 
+// TypeScript의 Enum #6.18
+// interface는 object의 type을 정의할 때 썻다면, enum은 반복되는 string을 type할 때 쓰면 좋다.
+export enum Categories {
+  "TO_DO" = "TO_DO",
+  "DOING" = "DOING",
+  "DONE" = "DONE",
+  // enum의 값은 기본적으로 0,1,2 이렇게 숫자이지만, 값을 지정해주면서 string으로 변경할 수도 있다.
+}
+
 // useForm에 타입하는방법 #6.8
 // register로 등록된 form 요소들의 key를 적어주면 된다. #6.8
 export interface IToDo {
   text: string;
   id: number;
-  category: "TO_DO" | "DOING" | "DONE";
+  category: Categories;
 }
 
 export const toDoState = atom<IToDo[]>({
@@ -15,7 +24,8 @@ export const toDoState = atom<IToDo[]>({
 
 export const categoryState = atom({
   key: "category",
-  default: "TO_DO",
+  default: Categories.TO_DO,
+  // enum Categories의 TO_DO의 값을 사용  = "TO_DO"
 });
 
 export const toDoSelector = selector({

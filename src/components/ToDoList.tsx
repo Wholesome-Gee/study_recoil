@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import ToDoForm from "./ToDoForm";
-import { categoryState, toDoSelector } from "../atom";
+import { Categories, categoryState, toDoSelector } from "../atom";
 import ToDo from "./ToDo";
 
 export default function ToDoList() {
@@ -18,7 +18,7 @@ export default function ToDoList() {
   */
 
   function onInput(event: React.FormEvent<HTMLSelectElement>) {
-    setCategory(event.currentTarget.value);
+    setCategory(event.currentTarget.value as Categories);
   }
 
   return (
@@ -26,9 +26,9 @@ export default function ToDoList() {
       <h1>오늘의 할일</h1>
       <hr />
       <select value={category} onInput={onInput}>
-        <option value="TO_DO">할 일</option>
-        <option value="DOING">진행중</option>
-        <option value="DONE">완료</option>
+        <option value={Categories.TO_DO}>할 일</option>
+        <option value={Categories.DOING}>진행중</option>
+        <option value={Categories.DONE}>완료</option>
       </select>
       <ToDoForm />
       {toDos?.map((toDo) => {
