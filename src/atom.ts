@@ -1,4 +1,11 @@
 import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
+const { persistAtom } = recoilPersist({
+  key: "recoil-persist", // 로컬 저장소에 데이터를 저장하는 데 사용됩니다.
+  storage: localStorage, // 데이터를 저장하는 데 사용할 저장소
+  converter: JSON, // 저장소에서 값이 직렬화/역직렬화되는 방식을 구성합니다.
+  // https://www.npmjs.com/package/recoil-persist 참고
+});
 
 // TS enum = 반복되는 string을 type할 때 쓰면 좋다.  #6.18
 export enum Categories {
@@ -18,6 +25,7 @@ export interface IToDo {
 export const toDoState = atom<IToDo[]>({
   key: "toDo",
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 // [ {text:"1번",id:1,category:"TO_DO"}, {text:"2번",id:2,category:"DOING"}, {text:"3번",id:3,category:"DONE"} ]
 
