@@ -8,28 +8,23 @@ interface IForm {
 
 function ToDoForm() {
   const { register, handleSubmit, setValue } = useForm<IForm>();
-  /*
-  register = form 관련 요소를 react-hook-form에 등록  #6.6
-  handleSubmit = form이 submit되었을 때 유효성검사 진행 & 새로고침 X, 2개 콜백함수를 parameter를 받음 ( 유효성검사 성공시(필수),실패시(옵션) )  #6.7
-  setValue = input 값을 변경  #6.10
-  */
   const category = useRecoilValue(categoryState);
   const setToDos = useSetRecoilState(toDoState);
+  // useSetRecoilState()는 recoil에 등록된 atom을 변경하는 함수를 반환  #6.3
 
   function successSubmit(data: IForm) {
-    // console.log("✔️ success", data);
-    setToDos((current) => [
+    // handleSubmit()의 콜백함수는 data를 parameter로 갖고, data는 register로 등록된 input이 들어있다.  #6.7
+    // console.log("✔️ success", data);  →  { inputKey: "inputValue", inputKey2: "inputValue2"... }
+    setToDos((toDos) => [
       {
         text: data.toDo,
         id: Date.now(),
         category,
       },
-      ...current,
+      ...toDos,
     ]);
     setValue("toDo", "");
   }
-  // setError('input key', errorMessage, { shouldFocus:true는 focus를 input에 다시 되돌려놓는다. })  #6.9
-  // setValue('input key', value) = input key의 값을 value로 바꾼다  #6.10
 
   return (
     <form onSubmit={handleSubmit(successSubmit)}>

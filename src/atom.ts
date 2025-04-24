@@ -1,17 +1,15 @@
 import { atom, selector } from "recoil";
 
-// TypeScript의 Enum #6.18
-// interface는 object의 type을 정의할 때 썻다면, enum은 반복되는 string을 type할 때 쓰면 좋다.
+// TS enum = 반복되는 string을 type할 때 쓰면 좋다.  #6.18
 export enum Categories {
   "TO_DO" = "TO_DO",
   "DOING" = "DOING",
   "DONE" = "DONE",
-  // enum의 값은 기본적으로 0,1,2 이렇게 숫자이지만, 값을 지정해주면서 string으로 변경할 수도 있다.
+  // enum의 값은 기본적으로 number(0,1,2...)이지만, string값을 지정할 수 있다.  #6.18
 }
 
-// useForm에 타입하는방법 #6.8
-// register로 등록된 form 요소들의 key를 적어주면 된다. #6.8
 export interface IToDo {
+  // 해당 interface는 'ToDoForm.tsx'의 useForm()에 type되며, register로 등록된 form 관련 요소들의 key를 적어준다.  #6.8
   text: string;
   id: number;
   category: Categories;
@@ -21,6 +19,7 @@ export const toDoState = atom<IToDo[]>({
   key: "toDo",
   default: [],
 });
+// [ {text:"1번",id:1,category:"TO_DO"}, {text:"2번",id:2,category:"DOING"}, {text:"3번",id:3,category:"DONE"} ]
 
 export const categoryState = atom({
   key: "category",
@@ -29,13 +28,13 @@ export const categoryState = atom({
 });
 
 export const toDoSelector = selector({
+  // selector는 atom을 가져와서 get 메서드를 통해 output을 custom할 수 있다.  #6.16
   key: "toDoSelector",
   get: ({ get }) => {
+    // get 메서드는 options parameter를 갖고 있으며, options 내부의 get함수를 사용하여 atom을 가져올 수 있다.  #6.16
     const toDos = get(toDoState);
     const category = get(categoryState);
     return toDos.filter((toDo) => toDo.category === category);
+    // Array.filter((item)=>조건식) = 조건식을 만족하는 배열의 요소들을 배열로 반환한다.
   },
 });
-// selector는 atom을 가져와서 output을 변형시킬 수 있다.  #6.16
-// get 함수는 options라는 parameter를 갖고 있으며, 그 안의 get함수를 사용하여 atom을 가져올 수 있다.  #6.16
-// Array.filter((item)=>조건식) = 조건식을 만족하는 배열의 요소들을 배열로 반환한다.

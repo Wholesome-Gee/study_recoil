@@ -7,11 +7,10 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 const queryClient = new QueryClient();
 
 root.render(
+  // recoil Setting = <RecoilRoot> + src/atoms.ts  #6.2
   <RecoilRoot>
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
   </RecoilRoot>
 );
-
-// <RecoilRoot>는 recoil을 사용하기 위한 사전 세팅  #6.2

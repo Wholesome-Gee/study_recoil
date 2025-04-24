@@ -62,12 +62,6 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 function App() {
-  /*
-  const isDark = useRecoilValue(isDarkAtom);
-  const setIsDarkAtom = useSetRecoilState(isDarkAtom);
-  useRecoilValue()는 recoil에 등록된 변수(atom)를 가져오는 방법  #6.2
-  useSetRecoilState()는 recoil에 등록된 변수(atom)를 변경하는 함수를 반환한다.  #6.3
-  */
   return (
     <>
       <GlobalStyles />
