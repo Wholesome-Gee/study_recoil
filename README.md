@@ -138,3 +138,9 @@ const { register, watch } = useForm()
 **📗typescript의 enum 사용법**
 
 ---
+
+### #7.0
+
+**string을 number로 바꾸고 싶을땐 string앞에 + 기호를 붙혀준다**
+
+- "100" → string, +"100" → number
