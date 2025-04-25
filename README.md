@@ -144,3 +144,24 @@ const { register, watch } = useForm()
 **string을 number로 바꾸고 싶을땐 string앞에 + 기호를 붙혀준다**
 
 - "100" → string, +"100" → number
+
+---
+
+### #7.1
+
+**recoil의 selector의 set기능**
+
+```js
+export const hoursSelector = selector<number>({
+  key:"hours",
+  get:({get})=>{
+    ...
+  },
+  set:({set},value)=>{
+    set(atom,value)
+  }
+  //외부 set은 parameter로 value를 받고 내부 set은 atom을 value로 바꾼다.
+})
+```
+
+---
